@@ -21,38 +21,60 @@ h1 {
     font-size: 32px;
 }
 
-#sketch-container {
+.sketch-container {
     box-sizing: content-box;
     display: flex;
     flex-wrap: wrap;
     border: 3px solid gray;
 }
 
+.cell {
+    background-color: white;
+}
+
 .options-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
-    width: 70%;
+    width: 70vmin;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-.options-container .reset {
+.options-container .option {
     cursor: pointer;
     padding: 5px;
     border: 2px solid black;
     border-radius: 5px;
+    margin: 3px;
 }
 
 .options-container .reset:hover {
     background-color: aquamarine;
+    color: black;
 }
 
-#slider-container {
-    width: 70%;
+.options-container .black {
+    background-color: black;
+    color: white;
 }
 
-.slider {
+.options-container .white {
+    background-color: white;
+    color: black
+}
+
+.options-container .unselected {
+    background-color: #DDDDDD;
+    color: black;
+}
+
+.slider-container {
+    width: 70vmin;
+}
+
+.sketch-size-slider {
     width: 100%
 }
