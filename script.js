@@ -107,7 +107,7 @@ function nextColor() {
 
 let currentColor = "black";
 let currentHue = 0;
-let cellDivs = {};
+let cellDivs = [];
 let numGridCells = 16;   // Creating a 16 by 16 grid
 const maxSize = 70;      // percentage of the viewport
 const gridDiv = document.querySelector(".sketch-container");
