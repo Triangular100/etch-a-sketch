@@ -1,14 +1,19 @@
 
-function createGridCells(grid, gridSize, numGridCells) {
-    grid.style.height = `${gridSize}vmin`;
-    grid.style.width = `${gridSize}vmin`;
+function initializeGrid() {
 
-    let cellSize = gridSize / numGridCells;
-    const cellDivs = createCells(numGridCells, cellSize);
-    cellDivs.forEach(cell => grid.appendChild(cell));
+    slider.value = numGridCells;
+
+    let cellSize = maxSize / numGridCells;
+    cellDivs = initializeCells(numGridCells, cellSize);
+
+    gridDiv.innerHTML = "";
+    cellDivs.forEach(cell => gridDiv.appendChild(cell));
+
+    gridDiv.style.maxWidth = `${maxSize}vmin`;
+
 }
 
-function createCells(numGridCells, cellSize) {
+function initializeCells(numGridCells, cellSize) {
     const cells = [];
     let numberCells = numGridCells ** 2;
     for (let i = 0; i < numberCells; i++) {
@@ -16,7 +21,7 @@ function createCells(numGridCells, cellSize) {
         cell.classList.add("cell");
         cell.style.width = `${cellSize}vmin`;
         cell.style.height = `${cellSize}vmin`;
-        cell.addEventListener("click", fillCell);
+        cell.addEventListener("mouseover", fillCell);
         cells.push(cell);
     }
 
@@ -25,11 +30,28 @@ function createCells(numGridCells, cellSize) {
 
 function fillCell(e) {
     const cell = e.target;
-    console.log(cell);
+    cell.style.backgroundColor = currentColor;
 }
 
-// Creating a 16 by 16 grid
-let gridSize = 80; // 80% of the viewport
-let numGridCells = 16;
+function resetGrid(e) {
+    cellDivs.forEach(cell => {
+        cell.style.backgroundColor = "white";
+    });
+}
+
+function updateGrid(e) {
+    numGridCells = e.target.value;
+    initializeGrid();
+}
+
+let currentColor = "black";
+let cellDivs = {};
+let numGridCells = 16;   // Creating a 16 by 16 grid
+const maxSize = 70;      // percentage of the viewport
 const gridDiv = document.querySelector("#sketch-container");
-createGridCells(gridDiv, gridSize, numGridCells);
+const resetDiv = document.querySelector(".reset");
+const slider = document.querySelector("#sketch-size");
+initializeGrid();
+
+resetDiv.addEventListener("click", resetGrid);
+slider.addEventListener("click", updateGrid);
